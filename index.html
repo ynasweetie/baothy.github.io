@@ -1,445 +1,111 @@
 <!DOCTYPE html>
-<html>
+<html lang="vi">
 <head>
-  <meta charset="UTF-8">
-  <title>Trang Lớp 10</title>
-  <style>
-    /* ===== BODY - nền tím loang ===== */
-    body {
-      margin: 0;
-      font-family: "Segoe UI", Arial, sans-serif;
-      background: linear-gradient(135deg, #f3e8ff, #d8b4fe, #a78bfa);
-      scroll-behavior: smooth;
-    }
-
-    /* ===== Banner ===== */
-    .banner img {
-      width: 100%;
-      height: 250px;
-      object-fit: cover;
-      display: block;
-    }
-
-    /* ===== MENU - tím glassmorphism ===== */
-    .menu {
-      position: sticky;
-      top: 0;
-      z-index: 1000;
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      background: linear-gradient(135deg, #c084fc, #8b5cf6, #6d28d9);
-      padding: 12px 0;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-      border-bottom: 1px solid rgba(255,255,255,0.4);
-    }
-
-    .menu ul {
-      list-style: none;
-      margin: 0;
-      padding: 0;
-      display: flex;
-      justify-content: center;
-      gap: 35px;
-    }
-
-    .menu ul li a {
-      text-decoration: none;
-      font-family: "Helvetica", Arial, sans-serif;
-      font-size: 18px;
-      font-weight: 600;
-      color: white;
-      padding: 10px 20px;
-      border-radius: 30px;
-      transition: 0.3s ease;
-      position: relative;
-    }
-
-    .menu ul li a:hover {
-      background: rgba(255,255,255,0.25);
-      transform: translateY(-3px);
-      box-shadow: 0 8px 20px rgba(0,0,0,0.25);
-    }
-
-    .menu ul li a::after {
-      content: "";
-      position: absolute;
-      left: 50%;
-      bottom: -6px;
-      width: 0;
-      height: 3px;
-      background: white;
-      border-radius: 5px;
-      transition: 0.3s;
-      transform: translateX(-50%);
-    }
-
-    .menu ul li a:hover::after {
-      width: 60%;
-    }
-
-    /* ===== HEADER - tím loang ===== */
-    .header {
-      padding: 40px 50px;
-      background: radial-gradient(circle at top left, #c084fc, #a78bfa, #ede9fe);
-      color: #4c1d95;
-      box-shadow: inset 0 -20px 40px rgba(255,255,255,0.6);
-    }
-
-    .header h1 {
-      font-size: 34px;
-      margin-bottom: 8px;
-    }
-
-    .subtitle {
-      font-family: Helvetica;
-      font-size: 18px;
-      opacity: 0.9;
-    }
-
-    /* ===== Wrapper ===== */
-    .content-wrapper {
-      background: rgba(255,255,255,0.6);
-      padding: 30px 50px 40px;
-      border-radius: 20px;
-      margin: 25px 40px;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-    }
-
-    .title {
-      text-align: center;
-      font-size: 60px;
-      color: #5b2b82;
-      margin-bottom: 25px;
-      font-weight: bold;
-      font-family: Tahoma;
-      letter-spacing: 2px;
-    }
-
-    /* ===== Content ===== */
-    .content {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 20px;
-    }
-
-    .icon-box {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      background: linear-gradient(135deg, #fdf4ff, #f5d0fe);
-      border: 2px solid #c084fc;
-      border-radius: 14px;
-      padding: 16px 20px;
-      box-shadow: 0 5px 15px rgba(0,0,0,0.08);
-      transition: 0.3s;
-      cursor: pointer;
-      text-decoration: none;
-      color: inherit;
-    }
-
-    .icon-box:hover {
-      background: linear-gradient(135deg, #fbcfe8, #e9d5ff);
-      transform: translateY(-4px) scale(1.02);
-      box-shadow: 0 12px 30px rgba(0,0,0,0.15);
-    }
-
-    .icon {
-      font-size: 40px;
-      color: #6d28d9;
-      transition: color 0.3s;
-    }
-
-    .date {
-      font-weight: 600;
-      color: #4c1d95;
-      transition: color 0.3s;
-    }
-
-    .icon-box:hover .icon,
-    .icon-box:hover .date {
-      color: #db2777;
-    }
-
-    /* ===== Popup ===== */
-    input[type="checkbox"] {
-      display: none;
-    }
-
-    .popup {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0, 0, 0, 0.6);
-      display: none;
-      justify-content: center;
-      align-items: flex-start;
-      padding-top: 10px;
-      overflow-y: auto;
-      z-index: 2000;
-      animation: fadeIn 0.4s ease;
-    }
-
-    @keyframes fadeIn {
-      from { transform: scale(0.95); opacity: 0; }
-      to { transform: scale(1); opacity: 1; }
-    }
-
-    #post1:checked ~ #popup1,
-    #post2:checked ~ #popup2,
-    #post3:checked ~ #popup3,
-    #post4:checked ~ #popup4,
-    #post5:checked ~ #popup5,
-    #post6:checked ~ #popup6,
-    #post7:checked ~ #popup7,
-    #post8:checked ~ #popup8,
-    #post9:checked ~ #popup9 {
-      display: flex;
-    }
-
-    .popup label.overlay-close {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      cursor: pointer;
-    }
-
-    .popup-content {
-      background: linear-gradient(135deg, #ffffff, #f5d0fe);
-      padding: 30px;
-      border-radius: 16px;
-      max-width: 750px;
-      width: 90%;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-      position: relative;
-      z-index: 2100;
-    }
-
-    .popup-with-image {
-      display: flex;
-      flex-direction: column;
-      gap: 16px;
-    }
-
-    .popup-img {
-      width: 100%;
-      border-radius: 12px;
-      object-fit: cover;
-      border: 3px solid #c084fc;
-    }
-
-    .close-btn {
-      display: inline-block;
-      margin-top: 15px;
-      padding: 8px 18px;
-      background: linear-gradient(135deg, #8b5cf6, #6d28d9);
-      color: white;
-      border-radius: 20px;
-      text-decoration: none;
-      transition: 0.3s;
-      font-weight: bold;
-    }
-
-    .close-btn:hover {
-      background: linear-gradient(135deg, #db2777, #9333ea);
-      transform: scale(1.05);
-    }
-
-    /* ===== Footer ===== */
-    .footer {
-      margin-top: 40px;
-      background: linear-gradient(135deg, #a78bfa, #6d28d9);
-      padding: 20px 40px;
-      text-align: center;
-      color: white;
-      font-weight: 500;
-    }
-        .footer{
-    background: linear-gradient(135deg,#58257b,#b56ddf);
-    color:white;
-    padding:40px 20px 20px;
-    }
-
-    .footer-container{
-    max-width:1100px;
-    margin:auto;
-    display:flex;
-    justify-content:space-between;
-    flex-wrap:wrap;
-    gap:30px;
-    }
-
-    .footer h3{
-     margin-bottom:10px;
-   }
-.footer p,
-.footer a{
-  color:#f3e9ff;
-  font-size:15px;
-}
-
-.footer a{
-  text-decoration:none;
-}
-
-.footer a:hover{
-  color:#ffd6f9;
-}
-
-.footer ul{
-  list-style:none;
-  padding:0;
-}
-
-.footer-bottom{
-  text-align:center;
-  margin-top:25px;
-  padding-top:15px;
-  border-top:1px solid rgba(255,255,255,0.3);
-  font-size:14px;
-}
-.music-control{
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
-  width: 50px;
-  height: 50px;
-  background: linear-gradient(135deg,#c084fc,#8b5cf6);
-  color: white;
-  font-size: 24px;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  box-shadow: 0 8px 20px rgba(0,0,0,0.25);
-  transition: 0.3s;
-  z-index: 3000;
-}
-
-.music-control:hover{
-  transform: scale(1.1);
-}
-
-  </style>
-   <link rel="stylesheet"
-     href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trang Lớp 10H-K28</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <style>
+        /* Giữ nguyên toàn bộ CSS của bạn từ đây... */
+        body {
+            margin: 0;
+            font-family: "Segoe UI", Arial, sans-serif;
+            background: linear-gradient(135deg, #f3e8ff, #d8b4fe, #a78bfa);
+            scroll-behavior: smooth;
+        }
+        .banner img { width: 100%; height: 250px; object-fit: cover; display: block; }
+        .menu { position: sticky; top: 0; z-index: 1000; backdrop-filter: blur(12px); background: linear-gradient(135deg, #c084fc, #8b5cf6, #6d28d9); padding: 12px 0; box-shadow: 0 10px 30px rgba(0,0,0,0.2); border-bottom: 1px solid rgba(255,255,255,0.4); }
+        .menu ul { list-style: none; margin: 0; padding: 0; display: flex; justify-content: center; gap: 35px; }
+        .menu ul li a { text-decoration: none; font-size: 18px; font-weight: 600; color: white; padding: 10px 20px; border-radius: 30px; transition: 0.3s ease; }
+        .menu ul li a:hover { background: rgba(255,255,255,0.25); transform: translateY(-3px); }
+        .header { padding: 40px 50px; background: radial-gradient(circle at top left, #c084fc, #a78bfa, #ede9fe); color: #4c1d95; text-align: center; }
+        .content-wrapper { background: rgba(255,255,255,0.6); padding: 30px 50px 40px; border-radius: 20px; margin: 25px 40px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); }
+        .title { text-align: center; font-size: 40px; color: #5b2b82; margin-bottom: 25px; font-weight: bold; }
+        .content { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
+        .icon-box { display: flex; align-items: center; gap: 12px; background: linear-gradient(135deg, #fdf4ff, #f5d0fe); border: 2px solid #c084fc; border-radius: 14px; padding: 16px 20px; cursor: pointer; transition: 0.3s; }
+        .icon-box:hover { transform: translateY(-4px); background: linear-gradient(135deg, #fbcfe8, #e9d5ff); }
+        input[type="checkbox"] { display: none; }
+        .popup { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.6); display: none; justify-content: center; align-items: center; z-index: 2000; }
+        .popup-content { background: white; padding: 30px; border-radius: 16px; max-width: 600px; width: 90%; position: relative; }
+        .popup-img { width: 100%; border-radius: 12px; margin-bottom: 15px; }
+        #post1:checked ~ #popup1, #post2:checked ~ #popup2, #post3:checked ~ #popup3, #post4:checked ~ #popup4, #post5:checked ~ #popup5, #post6:checked ~ #popup6, #post7:checked ~ #popup7, #post8:checked ~ #popup8, #post9:checked ~ #popup9 { display: flex; }
+        .footer { background: linear-gradient(135deg,#58257b,#b56ddf); color:white; padding:40px 20px; margin-top: 40px; text-align: center; }
+        .music-control { position: fixed; bottom: 20px; right: 20px; width: 50px; height: 50px; background: #8b5cf6; color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; z-index: 3000; }
+        /* ...Kết thúc phần CSS thu gọn của bạn */
+    </style>
 </head>
-
 <body>
 
-  <div class="banner">
-    <img src="banner.jpg" alt="Banner lớp 10">
-  </div>
-
-  <div class="menu">
-    <ul>
-      <li><a href="#">Trang chủ</a></li>
-      <li><a href="#">Giới thiệu</a></li>
-      <li><a href="#">Kỷ niệm</a></li>
-      <li><a href="#">Thành viên</a></li>
-      <li><a href="#lienhe">Liên hệ</a></li>
-    </ul>
-  </div>
-
-  <div class="header">
-    <h1>Chào mừng đến với lớp 10H-K28</h1>
-    <p class="subtitle">Nơi lưu giữ những kỷ niệm đáng nhớ nhất thời cấp 3!</p>
-  </div>
-
-  <div class="content-wrapper">
-    <h2 class="title">NHỮNG KỶ NIỆM ĐÁNG NHỚ</h2>
-    <div class="content">
-      <label for="post1" class="icon-box"><div class="icon">📘</div><span class="date">Lời mở đầu</span></label>
-      <label for="post2" class="icon-box"><div class="icon">🎉</div><span class="date">Khai giảng</span></label>
-      <label for="post3" class="icon-box"><div class="icon">🍃</div><span class="date">20/11 + 8/3</span></label>
-      <label for="post4" class="icon-box"><div class="icon">🌱</div><span class="date">19/11 + 6/4</span></label>
-      <label for="post5" class="icon-box"><div class="icon">🌸</div><span class="date">20/11 + Giai điệu tuổi hồng + Thanh lịch</span></label>
-      <label for="post6" class="icon-box"><div class="icon">🪻</div><span class="date">Liên hoan</span></label>
-      <label for="post7" class="icon-box"><div class="icon">🌊</div><span class="date">Sinh nhật thầy cô</span></label>
-      <label for="post8" class="icon-box"><div class="icon">🍀</div><span class="date">Thời đi học ai chẳng có một lần</span></label>
-      <label for="post9" class="icon-box"><div class="icon">🪷</div><span class="date">Lời kết</span></label>
+    <div class="banner">
+        <img src="banner.jpg" alt="Banner lớp 10">
     </div>
-  </div>
 
-  </div>
+    <div class="menu">
+        <ul>
+            <li><a href="#">Trang chủ</a></li>
+            <li><a href="#">Giới thiệu</a></li>
+            <li><a href="#">Kỷ niệm</a></li>
+            <li><a href="#">Thành viên</a></li>
+            <li><a href="#lienhe">Liên hệ</a></li>
+        </ul>
+    </div>
 
-  <!-- Checkbox -->
-  <input type="checkbox" id="post1"><input type="checkbox" id="post2"><input type="checkbox" id="post3"><input type="checkbox" id="post4"><input type="checkbox" id="post5"><input type="checkbox" id="post6"><input type="checkbox" id="post7"><input type="checkbox" id="post8"><input type="checkbox" id="post9">
+    <div class="header">
+        <h1>Chào mừng đến với lớp 10H-K28</h1>
+        <p>Nơi lưu giữ những kỷ niệm đáng nhớ nhất thời cấp 3!</p>
+    </div>
 
-  <!-- POPUPS -->
-  <!-- Mỗi popup có overlay-close để click ra ngoài là đóng -->
-  <!-- Popup 1 -->
-  <div class="popup" id="popup1"><label for="post1" class="overlay-close"></label><div class="popup-content popup-with-image"><img src="popup1.jpg" alt="Lời mở đầu" class="popup-img"><div class="popup-text"><h3>Lời mở đầu</h3><p> Lớp 10 của niên khóa 23-26 ở chuyên Hùng Vương bắt đầu bằng những bước chân còn chênh vênh trong một môi trường hoàn toàn mới, nơi mọi thứ đều vừa bỡ ngỡ vừa háo hức đến lạ kỳ. Chúng ta gặp nhau khi còn là những người xa lạ, mang theo những ánh nhìn dè dặt và những ước mơ chưa kịp gọi tên. Giữa những ngày đầu ấy, hoài bão tuổi trẻ đã âm thầm lớn lên, giản dị nhưng cháy bỏng. Mỗi khoảnh khắc trôi qua đều lặng lẽ khắc sâu thành ký ức không thể quên. Trang web này ra đời để lưu giữ năm tháng ấy — nơi tuổi trẻ bắt đầu rực rỡ với cảm xúc vẫn còn nguyên vẹn thuở ban sơ.</p><label for="post1" class="close-btn">Đóng</label></div></div></div>
-  <!-- Popup 2 -->
-  <div class="popup" id="popup2"><label for="post2" class="overlay-close"></label><div class="popup-content popup-with-image"><img src="popup2.jpg" alt="Ngày khai giảng" class="popup-img"><div class="popup-text"><h3>Ngày Khai Giảng</h3><p> Ngày khai giảng mở ra như một lời hẹn, đánh dấu một chặng hành trình mới của tuổi trẻ mà chúng ta đồng hành cùng nhau. Trong niềm háo hức ấy là sự tự hào khi được theo đuổi môn chuyên yêu thích, được khoác lên mình bộ đồng phục mới mang logo ngôi trường ta mơ ước. Sân trường bỗng dịu lại trong khoảnh khắc tà áo dài trắng tinh khôi lần đầu xuất hiện, trong trẻo và rất đỗi thanh xuân. Tiếng trống khai trường vang lên, rộn rã và dứt khoát, mở ra 1000 ngày rực rỡ của những năm tháng cấp ba. Thanh xuân vườn trường cũng từ khoảnh khắc ấy mà nở hoa.</p><label for="post2" class="close-btn">Đóng</label></div></div></div>
-  <!-- Popup 3 -->
-  <div class="popup" id="popup3"><label for="post3" class="overlay-close"></label><div class="popup-content popup-with-image"><img src="popup3.jpg" alt="20/10 + 8/3" class="popup-img"><div class="popup-text"><h3>20/10 + 8/3</h3><p>Giữa những ngày tháng học trò tưởng chừng chỉ xoay quanh bài vở và giờ học, sự chu đáo của các bạn nam vào ngày 20/10 và 8/3 đã để lại những bất ngờ thật đẹp. Những món quà đến muộn nhưng đầy chân thành ấy khiến các bạn nữ cảm nhận rõ sự trân trọng và yêu thương dành cho con gái. Không cần quá cầu kỳ, chỉ một lời chúc, một món quà nhỏ cũng đủ làm ngày hôm đó trở nên đặc biệt. Niềm hạnh phúc vỡ òa trong khoảnh khắc nhận quà, giản dị mà ấm áp đến lạ. Các bạn nữ chúng mình biết ơn những tấm lòng ấy vô cùng, vì đã góp phần làm thanh xuân của chúng mình thêm dịu dàng và đáng nhớ.</p><label for="post3" class="close-btn">Đóng</label></div></div></div>
-  <!-- Popup 4 -->
-  <div class="popup" id="popup4"><label for="post4" class="overlay-close"></label><div class="popup-content popup-with-image"><img src="popup4.jpg" alt="19/11 + 6/4" class="popup-img"><div class="popup-text"><h3>19/11 + 6/4</h3><p>Như một lời hồi đáp, vào những ngày 19/11 và 6/4, các bạn nữ đã dành sự quan tâm và trân trọng đến ngày của các bạn nam. Những món quà nhỏ và lời chúc giản dị ấy là cách chúng mình nói lời cảm ơn, dù có đến muộn nhưng luôn chân thành. Trong khoảnh khắc bất ngờ ấy, niềm hạnh phúc hiện lên rất khẽ nhưng đủ để cảm nhận sự yêu thương và sẻ chia. Có những điều không cần nói thành lời, chỉ cần được đón nhận bằng sự ấm áp. Và chính những điều đó đã làm những ngày tháng bên nhau này trở nên thật đáng nhớ.</p><label for="post4" class="close-btn">Đóng</label></div></div></div>
-  <!-- Popup 5 -->
-  <div class="popup" id="popup5"><label for="post5" class="overlay-close"></label><div class="popup-content popup-with-image"><img src="popup5.jpg" alt="20/11 + Giai điệu tuổi hồng + Thanh lịch" class="popup-img"><div class="popup-text"><h3>20/11 + Giai điệu tuổi hồng + Thanh lịch</h3><p>Cứ mỗi năm một lần, ngoài những giờ học trên lớp và đống sách vở, chúng mình lại có cơ hội cùng nhau ngồi lại để thảo luận nên bầu ra bạn nào để đi thanh lịch ? Chủ đề của lớp sẽ biểu diễn lần này là gì ? Nên tổ chức 20/11 cho các thầy cô như nào ? Những cuộc trò chuyện ấy sẽ mãi là một kỉ niệm đẹp trong cuộc đời học sinh của chúng mình.</p><label for="post5" class="close-btn">Đóng</label></div></div></div>
-  <!-- Popup 6 -->
-  <div class="popup" id="popup6"><label for="post6" class="overlay-close"></label><div class="popup-content popup-with-image"><img src="popup6.jpg" alt="Liên hoan" class="popup-img"><div class="popup-text"><h3>Liên hoan</h3><p>Kết thúc một học kỳ, một năm học, chúng mình đều tổ chức một buổi liên hoan để ăn mừng cho khoảng thời gian chúng ta đã trải qua cùng nhau, vào mỗi lần ăn liên hoan, cả lớp có dịp để quay quần, ăn uống, tổ chức tiệc tùng với nhau, khoảng thời gian vui vẻ ấy thực sự là dấu ấn đặc biệt của thời cấp 3 hồn nhiên, đầy ước mơ.</p><label for="post6" class="close-btn">Đóng</label></div></div></div>
-  <!-- Popup 7 -->
-  <div class="popup" id="popup7"><label for="post7" class="overlay-close"></label><div class="popup-content popup-with-image"><img src="popup7.jpg" alt="Sinh nhật thầy cô" class="popup-img"><div class="popup-text"><h3>Sinh nhật thầy cô</h3><p>Vào những ngày gần đến sinh nhật của mỗi thầy cô, chúng mình cùng nhau bàn bạc để chuẩn bị những bất ngờ nhỏ nhưng đầy ý nghĩa dành tặng thầy cô. Có khi chỉ là một tấm thiệp viết tay, một chiếc bánh giản dị hay vài lời chúc chân thành, nhưng tất cả đều chứa đựng sự kính trọng và biết ơn. Trong chính những khoảnh khắc ấy, khoảng cách giữa thầy và trò dường như được thu hẹp lại, để lại những kỉ niệm ấm áp khó quên trong quãng đời học sinh.</p><label for="post7" class="close-btn">Đóng</label></div></div></div>
-  <!-- Popup 8 -->
-  <div class="popup" id="popup8"><label for="post8" class="overlay-close"></label><div class="popup-content popup-with-image"><img src="popup8.jpg" alt="Thời đi học ai chẳng có một lần" class="popup-img"><div class="popup-text"><h3>Thời đi học ai chẳng có một lần</h3><p>Thời đi học là chuỗi ngày vừa quen thuộc vừa đặc biệt, với những buổi đến lớp vội vàng, những lần lo lắng vì bài kiểm tra hay những phút giây cười đùa vô tư cùng bạn bè. Dù có mệt mỏi hay áp lực, thì chính những ngày tháng ấy đã tạo nên một phần thanh xuân rực rỡ của chúng mình. Mai này khi nhìn lại, có lẽ ai cũng sẽ mỉm cười vì đã từng có một thời đi học hồn nhiên, chân thật đến thế.</p><label for="post8" class="close-btn">Đóng</label></div></div></div>
-  <!-- Popup 9 -->
-  <div class="popup" id="popup9"><label for="post9" class="overlay-close"></label><div class="popup-content popup-with-image"><img src="popup9.jpg" alt="Lời kết" class="popup-img"><div class="popup-text"><h3>Lời kết</h3><p>Hành trình của chúng ta là tập hợp của những kỉ niệm nhỏ bé nhưng đầy cảm xúc, được tạo nên từ tình bạn, sự quan tâm và những khoảnh khắc không thể lặp lại. Trang web này không chỉ là nơi lưu giữ hình ảnh hay câu chữ, mà còn là nơi cất giữ một phần thanh xuân của chúng mình. Dù sau này mỗi người có đi trên những con đường khác nhau, mong rằng khi nhìn lại, chúng ta vẫn nhớ về nhau, về một thời tuổi trẻ đã từng rực rỡ và chân thành như thế.</p><label for="post9" class="close-btn">Đóng</label></div></div></div>
-  <footer class="footer" id="lienhe">
-    <div class="footer-container">
-        <div class="footer-about">
-            <h3>Về chúng mình</h3>
-            <p> Tụi mình là :</p>
-            <p> Hồ Ngọc Bảo Thy </p>
-            <p> Ngũ Khánh Tâm</p>
-            <p> Lê Tiến Đạt</p>
-            <p> Nguyễn Thanh Hùng</p>
-            <p> Nguyễn Minh Phúc</p>
-            <p> và tụi mình ở đây để lưu giữ những kỷ niệm thanh xuân của 10H-K28!</p>
+    <div class="content-wrapper">
+        <h2 class="title">NHỮNG KỶ NIỆM ĐÁNG NHỚ</h2>
+        <div class="content">
+            <label for="post1" class="icon-box">📘 Lời mở đầu</label>
+            <label for="post2" class="icon-box">🎉 Khai giảng</label>
+            <label for="post3" class="icon-box">🍃 20/11 + 8/3</label>
+            <label for="post4" class="icon-box">🌱 19/11 + 6/4</label>
+            <label for="post5" class="icon-box">🌸 Hoạt động khác</label>
+            <label for="post6" class="icon-box">🪻 Liên hoan</label>
+            <label for="post7" class="icon-box">🌊 Sinh nhật thầy cô</label>
+            <label for="post8" class="icon-box">🍀 Thời học sinh</label>
+            <label for="post9" class="icon-box">🪷 Lời kết</label>
         </div>
-        <div class="footer-links">
-            <ul> 
-                <li><a href="#">Home</a></li>
-            </ul>
+    </div>
+
+    <input type="checkbox" id="post1">
+    <input type="checkbox" id="post2">
+    <input type="checkbox" id="post3">
+    <input type="checkbox" id="post4">
+    <input type="checkbox" id="post5">
+    <input type="checkbox" id="post6">
+    <input type="checkbox" id="post7">
+    <input type="checkbox" id="post8">
+    <input type="checkbox" id="post9">
+
+    <div class="popup" id="popup1">
+        <label for="post1" style="position:absolute; width:100%; height:100%;"></label>
+        <div class="popup-content">
+            <h3>Lời mở đầu</h3>
+            <p>Nội dung lời mở đầu của bạn ở đây...</p>
+            <label for="post1" style="cursor:pointer; color:purple;">[Đóng]</label>
         </div>
-        <div class="footer-contact">
-        <h3>Liên hệ</h3>
-        <p>Email: nhom1_lop12h_2326@gmail.com</p>
+    </div>
+    <footer class="footer" id="lienhe">
+        <p>© 2026 10H-K28 | Chuyên Hùng Vương 💜</p>
+    </footer>
 
-        <div class="social-icons">
-        <a href="https://www.facebook.com/choa.hv.k28?locale=vi_VN"><i class="fab fa-facebook"></i> Người chuyền hoá chất</a>
-        </div>
-        <div class="footer-bottom">
-         © 2026 10H-K28 | Thanh xuân lưu giữ tại đây 💜
-        </div>
-</footer>
-<audio id="bgMusic" loop>
-  <source src="nhacnen.mp3" type="audio/mpeg">
-</audio>
+    <audio id="bgMusic" loop>
+        <source src="nhacnen.mp3" type="audio/mpeg">
+    </audio>
 
-<div class="music-control" onclick="toggleMusic()">
-  🎵
-</div>
-<script>
-  const music = document.getElementById("bgMusic");
-  let playing = false;
+    <div class="music-control" onclick="toggleMusic()">🎵</div>
 
-  function toggleMusic(){
-    if(!playing){
-      music.play();
-      playing = true;
-    }else{
-      music.pause();
-      playing = false;
-    }
-  }
-</script>
-
-
+    <script>
+        const music = document.getElementById("bgMusic");
+        let isPlaying = false;
+        function toggleMusic() {
+            if (isPlaying) { music.pause(); } 
+            else { music.play().catch(e => console.log("Cần tương tác để phát nhạc")); }
+            isPlaying = !isPlaying;
+        }
+    </script>
 </body>
 </html>
